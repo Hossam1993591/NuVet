@@ -104,7 +104,7 @@ public class DependencyAnalyzer : IDependencyAnalyzer
         };
     }
 
-    public async Task<List<string>> FindProjectsAsync(string rootPath, CancellationToken cancellationToken = default)
+    public Task<List<string>> FindProjectsAsync(string rootPath, CancellationToken cancellationToken = default)
     {
         var projects = new List<string>();
         
@@ -125,7 +125,7 @@ public class DependencyAnalyzer : IDependencyAnalyzer
             _logger.LogError(ex, "Error finding projects in {RootPath}", rootPath);
         }
         
-        return projects;
+        return Task.FromResult(projects);
     }
 
     public async Task<List<PackageReference>> GetPackageReferencesAsync(string projectPath, CancellationToken cancellationToken = default)
@@ -206,7 +206,7 @@ public class DependencyAnalyzer : IDependencyAnalyzer
         }
     }
 
-    private async Task<List<PackageReference>> ParsePackagesConfigAsync(string packagesConfigPath, string projectPath)
+    private Task<List<PackageReference>> ParsePackagesConfigAsync(string packagesConfigPath, string projectPath)
     {
         var packageReferences = new List<PackageReference>();
         
@@ -246,7 +246,7 @@ public class DependencyAnalyzer : IDependencyAnalyzer
             _logger.LogError(ex, "Error parsing packages.config at {Path}", packagesConfigPath);
         }
         
-        return packageReferences;
+        return Task.FromResult(packageReferences);
     }
 
     private async Task BuildTransitiveDependenciesAsync(List<PackageReference> packages, CancellationToken cancellationToken)
@@ -301,7 +301,7 @@ public class DependencyAnalyzer : IDependencyAnalyzer
         }
     }
 
-    private async Task<List<string>> GetProjectsFromSolutionAsync(string solutionPath, CancellationToken cancellationToken)
+    private Task<List<string>> GetProjectsFromSolutionAsync(string solutionPath, CancellationToken cancellationToken)
     {
         var projects = new List<string>();
         
@@ -327,7 +327,7 @@ public class DependencyAnalyzer : IDependencyAnalyzer
             _logger.LogError(ex, "Error parsing solution {SolutionPath}", solutionPath);
         }
         
-        return projects;
+        return Task.FromResult(projects);
     }
 
     private static ProjectType DetermineProjectType(Project project)

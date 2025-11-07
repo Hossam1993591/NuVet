@@ -1,14 +1,21 @@
-# NuVet - NuGet Vulnerability Scanner & Auto-Updater
+# NuVet - .NET Vulnerability Scanner
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
-[![.NET Version](https://img.shields.io/badge/.NET-8.0-purple.svg)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![.NET 8.0](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/download/dotnet/8.0)
+[![NuGet](https://img.shields.io/nuget/v/NuVet.Core.svg)](https://www.nuget.org/packages/NuVet.Core/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/nuvet/nuvet/ci.yml?branch=main)](https://github.com/nuvet/nuvet/actions)
+[![Coverage](https://img.shields.io/badge/coverage-36%25-yellow.svg)](https://github.com/nuvet/nuvet/actions)
 
-NuVet is a powerful command-line tool designed to help .NET developers identify and automatically update vulnerable NuGet packages in their projects. It provides comprehensive vulnerability scanning, dependency analysis, and safe package updating with rollback capabilities.
+A comprehensive .NET vulnerability scanner for NuGet packages that helps identify security vulnerabilities in your dependencies.
 
-## 🚀 Features
+## Features
 
-- **Vulnerability Scanning**: Automatically scan .NET solutions and projects for packages with known security vulnerabilities
+- 🔍 **Comprehensive Scanning**: Analyzes .NET projects and solutions for vulnerable NuGet packages
+- 🛡️ **Multiple Data Sources**: Integrates with GitHub Security Advisories and NuGet vulnerability data
+- � **Detailed Reporting**: Provides detailed vulnerability reports with severity levels and remediation guidance
+- ⚡ **Fast Performance**: Efficient scanning with intelligent caching and parallel processing
+- 🔧 **Easy Integration**: Simple CLI interface and programmatic API
+- 📈 **Continuous Monitoring**: Supports integration with CI/CD pipelines
 - **Multiple Data Sources**: Integrates with GitHub Security Advisories and NuGet vulnerability databases
 - **Dependency Analysis**: Build complete dependency graphs including transitive dependencies
 - **Safe Updates**: Automatically update vulnerable packages with compatibility testing

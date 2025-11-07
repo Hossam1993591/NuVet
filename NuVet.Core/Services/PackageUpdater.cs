@@ -329,7 +329,7 @@ public class PackageUpdater : IPackageUpdater
         };
     }
 
-    private async Task<List<PackageUpdate>> PlanUpdatesAsync(
+    private Task<List<PackageUpdate>> PlanUpdatesAsync(
         ScanResult scanResult,
         UpdateOptions options,
         CancellationToken cancellationToken)
@@ -376,7 +376,7 @@ public class PackageUpdater : IPackageUpdater
             updates.Add(update);
         }
 
-        return updates;
+        return Task.FromResult(updates);
     }
 
     private async Task UpdatePackageInProjectAsync(
@@ -400,7 +400,7 @@ public class PackageUpdater : IPackageUpdater
         }
     }
 
-    private async Task UpdatePackageReferenceAsync(
+    private Task UpdatePackageReferenceAsync(
         string projectPath,
         string packageId,
         SemVersion targetVersion,
@@ -420,9 +420,10 @@ public class PackageUpdater : IPackageUpdater
         }
 
         doc.Save(projectPath);
+        return Task.CompletedTask;
     }
 
-    private async Task UpdatePackagesConfigAsync(
+    private Task UpdatePackagesConfigAsync(
         string packagesConfigPath,
         string packageId,
         SemVersion targetVersion,
@@ -442,6 +443,7 @@ public class PackageUpdater : IPackageUpdater
         }
 
         doc.Save(packagesConfigPath);
+        return Task.CompletedTask;
     }
 
     private async Task<(int ExitCode, string Output, string Error)> RunDotNetCommandAsync(

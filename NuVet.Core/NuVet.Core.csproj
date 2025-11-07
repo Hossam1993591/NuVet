@@ -5,6 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
+    <IsPackable>true</IsPackable>
+    <PackageId>NuVet.Core</PackageId>
+    <PackageDescription>Core library for NuVet - .NET vulnerability scanner for NuGet packages. Provides vulnerability detection, dependency analysis, and security reporting capabilities.</PackageDescription>
   </PropertyGroup>
 
   <ItemGroup>
