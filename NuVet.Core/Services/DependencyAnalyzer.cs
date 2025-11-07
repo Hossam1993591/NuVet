@@ -251,7 +251,7 @@ public class DependencyAnalyzer : IDependencyAnalyzer
 
     private async Task BuildTransitiveDependenciesAsync(List<PackageReference> packages, CancellationToken cancellationToken)
     {
-        var packageMap = packages.ToDictionary(p => $"{p.Id}_{p.Version}", p => p);
+        var packageMap = packages.GroupBy(p => $"{p.Id}_{p.Version}").ToDictionary(g => g.Key, g => g.First());
         
         foreach (var package in packages.ToList())
         {
