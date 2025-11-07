@@ -1,0 +1,131 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  release:
+    types: [ published ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+      
+    - name: Test
+      run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
+      
+    - name: Install ReportGenerator
+      run: dotnet tool install -g dotnet-reportgenerator-globaltool
+      
+    - name: Generate Coverage Report
+      run: reportgenerator -reports:"**/coverage.cobertura.xml" -targetdir:"CoverageReport" -reporttypes:"Html;Badges"
+      
+    - name: Upload Coverage Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: CoverageReport/
+        
+    - name: Comment Coverage Summary
+      if: github.event_name == 'pull_request'
+      run: |
+        COVERAGE=$(grep -o 'Line coverage: [0-9.]*%' CoverageReport/index.html | head -1 | grep -o '[0-9.]*')
+        echo "📊 **Code Coverage Summary**" >> $GITHUB_STEP_SUMMARY
+        echo "Line Coverage: ${COVERAGE}%" >> $GITHUB_STEP_SUMMARY
+        
+    - name: Coverage Gate
+      run: |
+        COVERAGE=$(grep -o 'Line coverage: [0-9.]*%' CoverageReport/index.html | head -1 | grep -o '[0-9.]*')
+        echo "Current coverage: ${COVERAGE}%"
+        if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+          echo "❌ Coverage is below 80% threshold"
+          exit 1
+        else
+          echo "✅ Coverage meets 80% threshold"
+        fi
+
+  package:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build Release
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Pack NuGet Package
+      run: dotnet pack NuVet.CLI/NuVet.CLI.csproj --configuration Release --no-build --output ./packages
+      
+    - name: Upload Package Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-packages
+        path: packages/*.nupkg
+
+  publish:
+    needs: [test, package]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download Package Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: nuget-packages
+        path: packages/
+        
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Publish to NuGet
+      run: dotnet nuget push packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
+  security-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Run Security Scan
+      run: |
+        dotnet list package --vulnerable --include-transitive || true
+        dotnet list package --deprecated || true
