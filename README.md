@@ -1,5 +1,7 @@
 # NuVet - .NET Vulnerability Scanner
 
+**Status**: Professional-grade security scanner for .NET applications - production-ready tool for automated vulnerability detection in NuGet dependencies.
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![.NET 8.0](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/download/dotnet/8.0)
 [![NuGet](https://img.shields.io/nuget/v/NuVet.Core.svg)](https://www.nuget.org/packages/NuVet.Core/)
