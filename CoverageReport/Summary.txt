@@ -1,0 +1,46 @@
+Summary
+  Generated on: 11/19/2025 - 3:39:45 PM
+  Coverage date: 11/7/2025 - 11:33:42 AM - 11/19/2025 - 3:39:24 PM
+  Parser: MultiReport (6x Cobertura)
+  Assemblies: 1
+  Classes: 24
+  Files: 12
+  Line coverage: 35.5%
+  Covered lines: 484
+  Uncovered lines: 876
+  Coverable lines: 1360
+  Total lines: 2346
+  Branch coverage: 18.1% (69 of 380)
+  Covered branches: 69
+  Total branches: 380
+  Method coverage: 67.7% (164 of 242)
+  Full method coverage: 64.4% (156 of 242)
+  Covered methods: 164
+  Fully covered methods: 156
+  Total methods: 242
+
+NuVet.Core                                                  35.5%
+  NuVet.Core.Models.BackupFile                               100%
+  NuVet.Core.Models.BreakingChange                           100%
+  NuVet.Core.Models.DependencyGraph                          100%
+  NuVet.Core.Models.PackageDependency                        100%
+  NuVet.Core.Models.PackageMetadata                          100%
+  NuVet.Core.Models.PackageReference                         100%
+  NuVet.Core.Models.PackageSearchResult                      100%
+  NuVet.Core.Models.PackageUpdate                           91.6%
+  NuVet.Core.Models.PackageVersion                           100%
+  NuVet.Core.Models.ProjectInfo                              100%
+  NuVet.Core.Models.ScanResult                               100%
+  NuVet.Core.Models.ScanSummary                              100%
+  NuVet.Core.Models.UpdateBackup                             100%
+  NuVet.Core.Models.UpdateResult                             100%
+  NuVet.Core.Models.Vulnerability                            100%
+  NuVet.Core.Models.VulnerablePackage                        100%
+  NuVet.Core.Services.Implementation.DependencyAnalyzer        0%
+  NuVet.Core.Services.Implementation.NuGetService              0%
+  NuVet.Core.Services.Implementation.PackageUpdater            0%
+  NuVet.Core.Services.Implementation.VulnerabilityScanner   96.7%
+  NuVet.Core.Services.Implementation.VulnerabilityService   64.4%
+  NuVet.Core.Services.ScanOptions                            100%
+  NuVet.Core.Services.UpdateOptions                          100%
+  NuVet.Core.Services.ValidationResult                       100%
